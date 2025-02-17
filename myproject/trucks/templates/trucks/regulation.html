@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block title %}Truck Regulation Policies{% endblock %}
+ 
+
+{% block content %}
+<style>
+    /* General Page Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container Styling */
+.policy-container {
+    width: 80%;
+    margin: 40px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title Styling */
+.policy-title {
+    font-size: 2rem;
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Introduction Text */
+.policy-intro {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* Section Styling */
+.policy-section {
+    margin-bottom: 30px;
+}
+
+.policy-section h2 {
+    font-size: 1.5rem;
+    color: #222;
+    border-left: 5px solid #007BFF;
+    padding-left: 10px;
+    margin-bottom: 15px;
+}
+
+/* List Styling */
+.policy-section ul {
+    list-style-type: square;
+    padding-left: 20px;
+}
+
+.policy-section ul li {
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 8px;
+}
+
+/* Hover Effect on List Items */
+.policy-section ul li:hover {
+    color: #007BFF;
+    transition: 0.3s ease-in-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .policy-container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .policy-title {
+        font-size: 1.8rem;
+    }
+
+    .policy-section h2 {
+        font-size: 1.3rem;
+    }
+
+    .policy-section ul li {
+        font-size: 1rem;
+    }
+}
+
+</style>
+<div class="policy-container">
+    <h1 class="policy-title">Truck Regulation Policies</h1>
+
+    <p class="policy-intro">
+        Truck regulation policies are essential for ensuring road safety, environmental protection, 
+        and efficient transportation. These rules govern aspects such as weight limits, emissions, 
+        driver working hours, and vehicle maintenance.
+    </p>
+
+    <section class="policy-section">
+        <h2>1. Weight and Load Regulations</h2>
+        <p>Overloaded trucks pose serious risks to infrastructure and road safety. Regulations include:</p>
+        <ul>
+            <li><strong>Gross Vehicle Weight Rating (GVWR):</strong> Maximum allowable truck weight.</li>
+            <li><strong>Axle Weight Limits:</strong> Restrictions on weight distribution per axle.</li>
+            <li><strong>Overweight Permit System:</strong> Special permits for exceeding weight limits.</li>
+        </ul>
+    </section>
+
+    <section class="policy-section">
+        <h2>2. Emission and Environmental Regulations</h2>
+        <p>Trucks contribute significantly to air pollution. Regulations include:</p>
+        <ul>
+            <li><strong>Euro Standards and EPA Rules:</strong> Limits on harmful emissions.</li>
+            <li><strong>Idle Reduction Policies:</strong> Restrictions on unnecessary engine idling.</li>
+            <li><strong>Alternative Fuel Usage:</strong> Promotion of electric and natural gas-powered trucks.</li>
+        </ul>
+    </section>
+
+    <section class="policy-section">
+        <h2>3. Driver Safety Regulations</h2>
+        <p>To prevent accidents caused by fatigue, these rules apply:</p>
+        <ul>
+            <li><strong>Hours of Service (HOS) Limits:</strong> Maximum driving hours per shift.</li>
+            <li><strong>Mandatory Rest Breaks:</strong> Required breaks for long-haul drivers.</li>
+            <li><strong>Electronic Logging Devices (ELDs):</strong> Digital tracking of work hours.</li>
+        </ul>
+    </section>
+
+    <section class="policy-section">
+        <h2>4. Vehicle Maintenance and Inspection</h2>
+        <p>Regular inspections ensure truck safety and reliability:</p>
+        <ul>
+            <li><strong>Routine Inspections:</strong> Checking brakes, tires, and engine performance.</li>
+            <li><strong>Maintenance Records:</strong> Keeping a log of service and repairs.</li>
+            <li><strong>Roadside Safety Checks:</strong> Random inspections by authorities.</li>
+        </ul>
+    </section>
+
+    <section class="policy-section">
+        <h2>5. Conclusion</h2>
+        <p>Strict enforcement of truck regulation policies ensures road safety, minimizes environmental damage, 
+        and improves transport efficiency. Continued updates to these regulations are necessary to adapt 
+        to evolving challenges in the trucking industry.</p>
+    </section>
+</div>
+{% endblock %}

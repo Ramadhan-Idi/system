@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Truck Overload Monitoring</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 15px 20px;
+    color: white;
+  }
+
+  .navbar .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+
+  .nav-links li {
+    display: inline;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 1em;
+  }
+
+  .menu-toggle {
+    display: none;
+    font-size: 1.5em;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      background-color: #333;
+      text-align: center;
+    }
+
+    .nav-links.active {
+      display: flex;
+    }
+
+    .menu-toggle {
+      display: block;
+    }
+  }
+
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">Truck Monitor</div>
+    <ul class="nav-links">
+      <li><a href="{% url 'truck_list' %}">Home</a></li>
+      <li><a href="#">Dashboard</a></li>
+      <li><a href="{% url 'regulation' %}">Regulations</a></li>
+      <li><a href="{% url 'contact' %}">Contact us</a></li>
+    </ul>
+    <div class="menu-toggle">&#9776;</div>
+  </nav>
+
+  {% block content %}{% endblock %}
+</body>
+</html>
