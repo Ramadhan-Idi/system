@@ -78,8 +78,6 @@ http://127.0.0.1:8000/admin/
 ## Technologies Used
 - Django (Python)
 - HTML, CSS, JavaScript
-- SQLite (default database, can be replaced with PostgreSQL/MySQL)
+- SQLite
 
-## License
-This project is licensed under the MIT License.
 
