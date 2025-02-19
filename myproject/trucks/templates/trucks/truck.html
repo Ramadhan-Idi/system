@@ -1,129 +1,179 @@
-
 {% extends 'base.html' %}
+
 {% block title %}Truck Monitoring{% endblock %}
-  
+
 {% block content %}
-  <style>
-  body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-  }
+{% load static %}
+<style>
 
 
   .container {
     width: 80%;
-    margin: 20px auto;
-    padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 30px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.8);  /* Semi-transparent white background */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   }
 
   .search-container {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
 
   .search-container input {
-    padding: 10px;
+    padding: 12px;
     width: 250px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 25px;
+    margin-right: 10px;
+    font-size: 16px;
   }
 
   .search-container button {
-    padding: 10px 15px;
+    padding: 12px 20px;
     border: none;
-    background-color: #333;
+    background-color: #007BFF;
     color: white;
-    border-radius: 5px;
+    border-radius: 25px;
     cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
   }
 
   .search-container button:hover {
-    background-color: #555;
+    background-color: #0056b3;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  table th, table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+
+  table th {
+    background-color: #007BFF;
+    color: white;
+    font-size: 18px;
+  }
+
+  table td {
+    font-size: 16px;
   }
 
   .status {
     font-weight: bold;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 8px 12px;
+    border-radius: 25px;
     color: white;
   }
 
   .red {
-    background-color: red;
+    background-color: #f44336;
   }
 
   .green {
-    background-color: green;
+    background-color: #4CAF50;
   }
-  </style>
-</head>
-<body>
+
+  .status:hover {
+    opacity: 0.8;
+  }
+
+  #noResults {
+    color: red;
+    text-align: center;
+    font-size: 18px;
+    display: none;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+</style>
+<body style="background: url({% static 'trucks/images/truck.jpg' %}) no-repeat center center fixed; background-size: cover;">
 
 
-  <!-- Search Bar -->
-  <div class="search-container">
-    <input type="text" id="searchInput" placeholder="Search by License Plate...">
-    <button onclick="filterTrucks()">Search</button>
-  </div>
+<!-- Search Bar -->
+<div class="search-container">
+  <input type="text" id="searchInput" placeholder="Search by License Plate...">
+  <button onclick="filterTrucks()">Search</button>
+</div>
 
-  <div class="container">
-    <h1>Truck Monitoring</h1>
-    <table border="1" width="100%">
-      <thead>
-        <tr>
-          <th>License Plate</th>
-          <th>Current Weight</th>
-          <th>Average Weight</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody id="truckTable">
-        {% for truck in trucks %}
-        <tr>
-          <td>{{ truck.license_plate }}</td>
-          <td>{{ truck.current_weight }}t</td>
-          <td>{{ truck.average_weight }}t</td>
-          <td class="status {{ truck.status_color }}">{{ truck.status }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+<div class="container">
+  <h1>Truck Monitoring</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>License Plate</th>
+        <th>Current Weight</th>
+        <th>Average Weight</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="truckTable">
+      {% for truck in trucks %}
+      <tr>
+        <td>{{ truck.license_plate }}</td>
+        <td>{{ truck.current_weight }}t</td>
+        <td>{{ truck.average_weight }}t</td>
+        <td class="status {{ truck.status_color }}">{{ truck.status }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
-    <!-- No results message -->
-    <p id="noResults" style="display: none; color: red;">No matching trucks found.</p>
-  </div>
+  <!-- No results message -->
+  <p id="noResults">No matching trucks found.</p>
+</div>
 
-  <script>
-    function filterTrucks() {
-      let input = document.getElementById("searchInput").value.toUpperCase();
-      let table = document.getElementById("truckTable");
-      let rows = table.getElementsByTagName("tr");
-      let found = false;
+<script>
+  function filterTrucks() {
+    let input = document.getElementById("searchInput").value.toUpperCase();
+    let table = document.getElementById("truckTable");
+    let rows = table.getElementsByTagName("tr");
+    let found = false;
 
-      for (let i = 0; i < rows.length; i++) {
-        let plateCell = rows[i].getElementsByTagName("td")[0];
-        if (plateCell) {
-          let plateText = plateCell.textContent || plateCell.innerText;
-          if (plateText.toUpperCase().includes(input)) {
-            rows[i].style.display = "";
-            found = true;
-          } else {
-            rows[i].style.display = "none";
-          }
+    for (let i = 0; i < rows.length; i++) {
+      let plateCell = rows[i].getElementsByTagName("td")[0];
+      if (plateCell) {
+        let plateText = plateCell.textContent || plateCell.innerText;
+        if (plateText.toUpperCase().includes(input)) {
+          rows[i].style.display = "";
+          found = true;
+        } else {
+          rows[i].style.display = "none";
         }
       }
-
-      // Show "No results found" if nothing matches
-      document.getElementById("noResults").style.display = found ? "none" : "block";
     }
-  </script>
 
+    // Show "No results found" if nothing matches
+    document.getElementById("noResults").style.display = found ? "none" : "block";
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    // Ensure page content is fully loaded before triggering alerts
+    setTimeout(function() {
+      let overloadedTrucks = JSON.parse('{{ overloaded_trucks|safe }}');
+
+      // Trigger alerts only if there are overloaded trucks
+      if (overloadedTrucks.length > 0) {
+        overloadedTrucks.forEach(truck => {
+          alert(`Average weight exceeded for Truck: ${truck.license_plate}!`);
+        });
+      }
+    }, 100);  // Delay to ensure content is fully loaded before triggering alerts
+  });
+</script>
 </body>
 
 {% endblock %}
-
