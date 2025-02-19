@@ -1,5 +1,5 @@
 # Truck Overload Detector and Monitoring System using IoT
-
+The **Truck Overload Detector and Monitoring System using IoT** is an advanced solution designed to prevent vehicle overloading by integrating **Internet of Things (IoT) technology** with real-time monitoring. This system typically consists of **weight sensors (load cells)** installed on truck axles, **microcontrollers** (such as Arduino or Raspberry Pi) to process weight data, and **wireless communication modules** (such as Wi-Fi or GSM) to transmit data to a centralized server. The collected weight information is then displayed on a web-based dashboard, where administrators can monitor truck loads, detect overloading instances, and receive automated alerts when a truck exceeds the predefined weight limit. Additionally, GPS tracking can be integrated to provide real-time location updates of overloaded vehicles. This system enhances **road safety, reduces infrastructure damage, ensures regulatory compliance, and improves fleet management efficiency** by preventing illegal overloading.
 This is a web-based Truck Overload Detector and Monitoring System built using Django, HTML, CSS, and JavaScript.
 
 ## Features
