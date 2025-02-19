@@ -4,21 +4,20 @@
 
 {% block content %}
 {% load static %}
+
 <style>
-
-
   .container {
     width: 80%;
     margin: 30px auto;
     padding: 30px;
-    background: rgba(255, 255, 255, 0.8);  /* Semi-transparent white background */
+    background: rgba(255, 255, 255, 0.8);
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   }
 
   .search-container {
     text-align: center;
-    margin-bottom: 30px;
+    margin: 20px auto 40px auto;
   }
 
   .search-container input {
@@ -100,16 +99,16 @@
     color: #333;
   }
 </style>
+
 <body style="background: url({% static 'trucks/images/truck.jpg' %}) no-repeat center center fixed; background-size: cover;">
 
-
-<!-- Search Bar -->
-<div class="search-container">
-  <input type="text" id="searchInput" placeholder="Search by License Plate...">
-  <button onclick="filterTrucks()">Search</button>
-</div>
-
 <div class="container">
+  <!-- Search Bar (Now positioned right under the inherited navbar) -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search by License Plate...">
+    <button onclick="filterTrucks()">Search</button>
+  </div>
+
   <h1>Truck Monitoring</h1>
   <table>
     <thead>
@@ -156,24 +155,21 @@
       }
     }
 
-    // Show "No results found" if nothing matches
     document.getElementById("noResults").style.display = found ? "none" : "block";
   }
 
   document.addEventListener("DOMContentLoaded", function() {
-    // Ensure page content is fully loaded before triggering alerts
     setTimeout(function() {
       let overloadedTrucks = JSON.parse('{{ overloaded_trucks|safe }}');
 
-      // Trigger alerts only if there are overloaded trucks
       if (overloadedTrucks.length > 0) {
         overloadedTrucks.forEach(truck => {
           alert(`Average weight exceeded for Truck: ${truck.license_plate}!`);
         });
       }
-    }, 100);  // Delay to ensure content is fully loaded before triggering alerts
+    }, 100);
   });
 </script>
-</body>
 
+</body>
 {% endblock %}
