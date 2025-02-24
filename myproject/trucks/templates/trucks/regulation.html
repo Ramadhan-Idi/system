@@ -1,96 +1,134 @@
 {% extends 'base.html' %}
 
 {% block title %}Truck Regulation Policies{% endblock %}
- 
 
 {% block content %}
 <style>
     /* General Page Styling */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
-
-/* Container Styling */
-.policy-container {
-    width: 80%;
-    margin: 40px auto;
-    padding: 30px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Title Styling */
-.policy-title {
-    font-size: 2rem;
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-/* Introduction Text */
-.policy-intro {
-    font-size: 1.2rem;
-    text-align: center;
-    color: #666;
-    margin-bottom: 30px;
-}
-
-/* Section Styling */
-.policy-section {
-    margin-bottom: 30px;
-}
-
-.policy-section h2 {
-    font-size: 1.5rem;
-    color: #222;
-    border-left: 5px solid #007BFF;
-    padding-left: 10px;
-    margin-bottom: 15px;
-}
-
-/* List Styling */
-.policy-section ul {
-    list-style-type: square;
-    padding-left: 20px;
-}
-
-.policy-section ul li {
-    font-size: 1.1rem;
-    color: #444;
-    margin-bottom: 8px;
-}
-
-/* Hover Effect on List Items */
-.policy-section ul li:hover {
-    color: #007BFF;
-    transition: 0.3s ease-in-out;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .policy-container {
-        width: 90%;
-        padding: 20px;
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(to right,black, #4a6d75);
+        margin: 0;
+        padding: 0;
+        color: #333;
     }
 
+    /* Container Styling */
+    .policy-container {
+        width: 80%;
+        margin: 50px auto;
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    /* Title Styling */
     .policy-title {
-        font-size: 1.8rem;
+        font-size: 2.5rem;
+        text-align: center;
+        color: #007BFF;
+        font-weight: bold;
+        animation: fadeIn 1.2s ease-in-out;
+    }
+
+    /* Introduction Text */
+    .policy-intro {
+        font-size: 1.3rem;
+        text-align: center;
+        color: #555;
+        margin-bottom: 30px;
+    }
+
+    /* Section Styling */
+    .policy-section {
+        margin-bottom: 40px;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        transform: translateX(-50px);
+        opacity: 0;
+        transition: transform 0.6s ease-out, opacity 0.6s ease-out;
     }
 
     .policy-section h2 {
-        font-size: 1.3rem;
+        font-size: 1.8rem;
+        color: #007BFF;
+        border-left: 6px solid #007BFF;
+        padding-left: 12px;
+        margin-bottom: 15px;
+        transition: color 0.3s ease-in-out;
+    }
+
+    .policy-section:hover h2 {
+        color: #00aaff;
+    }
+
+    /* List Styling */
+    .policy-section ul {
+        list-style: none;
+        padding-left: 0;
     }
 
     .policy-section ul li {
-        font-size: 1rem;
+        font-size: 1.2rem;
+        color: #444;
+        margin-bottom: 10px;
+        padding: 10px;
+        background: rgba(0, 123, 255, 0.1);
+        border-left: 5px solid #007BFF;
+        border-radius: 5px;
+        transition: background 0.3s ease-in-out, transform 0.2s;
     }
-}
 
+    .policy-section ul li:hover {
+        background: rgba(0, 123, 255, 0.2);
+        transform: translateX(5px);
+    }
+
+    /* Keyframe Animations */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    /* Scroll Animation */
+    .show {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .policy-container {
+            width: 90%;
+            padding: 20px;
+        }
+
+        .policy-title {
+            font-size: 2rem;
+        }
+
+        .policy-section h2 {
+            font-size: 1.5rem;
+        }
+
+        .policy-section ul li {
+            font-size: 1rem;
+        }
+    }
 </style>
+
 <div class="policy-container">
     <h1 class="policy-title">Truck Regulation Policies</h1>
 
@@ -147,4 +185,27 @@ body {
         to evolving challenges in the trucking industry.</p>
     </section>
 </div>
+
+<script>
+    // Fade-in effect for container
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector(".policy-container").style.opacity = "1";
+        document.querySelector(".policy-container").style.transform = "translateY(0)";
+    });
+
+    // Scroll animation for sections
+    function revealSections() {
+        let sections = document.querySelectorAll(".policy-section");
+        sections.forEach((section) => {
+            let sectionTop = section.getBoundingClientRect().top;
+            let windowHeight = window.innerHeight;
+            if (sectionTop < windowHeight - 50) {
+                section.classList.add("show");
+            }
+        });
+    }
+
+    window.addEventListener("scroll", revealSections);
+</script>
+
 {% endblock %}

@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% block title %} Contact us{% endblock %}
-  
+
 {% block content %}
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +15,8 @@
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            position: relative;
+            overflow-x: hidden;
         }
 
         .container {
@@ -22,6 +26,8 @@
             background: white;
             border-radius: 8px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
         }
 
         h2 {
@@ -78,6 +84,24 @@
             color: green;
             text-align: center;
             font-weight: bold;
+            display: none;
+            font-size: 18px;
+            margin-top: 15px;
+        }
+
+        /* Falling flowers */
+        .flower {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-image: url('{% static "trucks/images/flower.png" %}');
+            background-size: cover;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            from { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+            to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
@@ -86,7 +110,7 @@
 <div class="container">
     <h2>Contact Us</h2>
     
-    <form action="https://formspree.io/f/mkgovynn" method="POST">
+    <form id="contactForm" action="https://formspree.io/f/mkgovynn" method="POST">
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
@@ -102,14 +126,60 @@
             <textarea id="message" name="message" rows="5" required></textarea>
         </div>
 
-        <button type="submit">Send Message</button>
+        <button type="submit">Send Email</button>
     </form>
+
+    <div class="success-message" id="successMessage">
+        🎉 Email Sent Successfully!
+    </div>
 
     <div class="contact-info">
         <p><i class="fas fa-phone"></i> +123 456 7890</p>
         <p><i class="fas fa-envelope"></i> support@example.com</p>
     </div>
 </div>
+
+<script>
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        let form = this;
+        let successMessage = document.getElementById("successMessage");
+
+        // Submit form data using AJAX
+        fetch(form.action, {
+            method: form.method,
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+        }).then(response => {
+            if (response.ok) {
+                successMessage.style.display = "block"; // Show success message
+                form.reset(); // Clear form
+                dropFlowers(); // Start flower animation
+
+                setTimeout(() => {
+                    window.location.href = "/"; // Redirect to homepage after 3 seconds
+                }, 3000);
+            } else {
+                alert("Oops! Something went wrong.");
+            }
+        }).catch(error => {
+            alert("Error submitting the form. Try again later.");
+        });
+    });
+
+    function dropFlowers() {
+        for (let i = 0; i < 20; i++) {
+            let flower = document.createElement("div");
+            flower.classList.add("flower");
+            flower.style.left = Math.random() * window.innerWidth + "px";
+            flower.style.animationDuration = (Math.random() * 3 + 2) + "s";
+            document.body.appendChild(flower);
+
+            setTimeout(() => { flower.remove(); }, 5000);
+        }
+    }
+</script>
 
 </body>
 {% endblock %}

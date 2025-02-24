@@ -20,4 +20,8 @@ def trucks_list(request):
 def contact(request):
     return render(request, 'contact.html')
 
+def dashboard(request):
+    return render(request, 'dashboard.html')
+
+
 

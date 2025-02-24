@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+
+{% block title %}Truck Monitoring{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<style>
+    /* General Styling */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Hero Section */
+    .hero {
+        position: relative;
+        height: 80vh;
+        background: url('{% static "trucks/images/truck.jpg" %}') no-repeat center center/cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        animation: fadeIn 2s ease-in-out;
+    }
+    
+    .hero h1 {
+        font-size: 3rem;
+        font-weight: bold;
+    }
+    
+    .hero p {
+        font-size: 1.5rem;
+        margin-top: 10px;
+    }
+    
+    /* About Section */
+    .about {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 50px;
+        background: white;
+    }
+    
+    .about img {
+        width: 40%;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .about-text {
+        width: 50%;
+        animation: slideInLeft 1.5s ease-in-out;
+    }
+    
+    .about-text h2 {
+        font-size: 2.5rem;
+        color: #007BFF;
+        margin-bottom: 10px;
+    }
+    
+    .about-text p {
+        font-size: 1.2rem;
+        color: #555;
+        line-height: 1.6;
+    }
+    .feature-box {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 20px;
+        align-items: stretch;
+    }
+    .features h2 {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    .feature {
+        flex: 1;
+        min-width: 300px;
+        max-width: 32%;
+        padding: 20px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.4s ease-in-out, box-shadow 0.3s;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .feature img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+    .feature h3 {
+        color: #007BFF;
+        font-size: 1.5rem;
+        margin-bottom: 12px;
+    }
+
+    .feature p {
+        font-size: 1.1rem;
+        color: #555;
+    }
+
+    .feature:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    @media (max-width: 900px) {
+        .feature-box {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .feature {
+            max-width: 80%;
+        }
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    @keyframes slideInLeft {
+        from { transform: translateX(-50px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    </style>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div>
+            <h1>Welcome to the Truck Overload Detector</h1>
+            <p>Ensuring road safety through real-time truck weight monitoring.</p>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="about">
+        <div class="about-text">
+            <h2>How It Works</h2>
+            <p>
+                The Truck Overload Detector continuously monitors truck weights using IoT sensors 
+                and Django-powered dashboards. If a truck exceeds the legal weight limit (48 tons), 
+                the system issues alerts and logs violations in the admin panel.
+            </p>
+        </div>
+        <img src="{% static 'trucks/images/truck2.jpg' %}" alt="Truck Monitoring">
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features">
+        <h2>Key Features</h2>
+        <div class="feature-box">
+            <div class="feature">
+                <img src="{% static 'trucks/images/truck3.jpg' %}" alt="Real-time Monitoring">
+                <h3>Real-Time Monitoring</h3>
+                <p>Live updates on truck weights to detect overloads instantly.</p>
+            </div>
+            <div class="feature">
+                <img src="{% static 'trucks/images/truck4.jpg' %}" alt="Automated Alerts">
+                <h3>Automated Alerts</h3>
+                <p>Instant alerts when a truck exceeds the 48-ton limit.</p>
+            </div>
+            <div class="feature">
+                <img src="{% static 'trucks/images/truck5.jpg' %}" alt="Admin Dashboard">
+                <h3>Admin Dashboard</h3>
+                <p>Manage truck data and monitor overload history in one place.</p>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let elements = document.querySelectorAll(".feature");
+            elements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = "1";
+                    el.style.transform = "translateY(0)";
+                }, index * 200);
+            });
+        });
+        </script>
+        
+{% endblock %}
